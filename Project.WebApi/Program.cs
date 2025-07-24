@@ -1,6 +1,8 @@
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Project.Persistance.Context;
 using Project.Presentation;
 
 namespace Project.WebApi
@@ -10,6 +12,9 @@ namespace Project.WebApi
 		public static void Main(string[] args)
 		{
 			var builder = WebApplication.CreateBuilder(args);
+
+			builder.Services.AddDbContext<AppDbContext>(opt => 
+					opt.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerConnection")));
 
 			// Add services to the container.
 

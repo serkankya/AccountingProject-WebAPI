@@ -1,0 +1,14 @@
+﻿using Project.Domain.Abstract;
+
+namespace Project.Domain.MainEntities
+{
+	public class Company : EntityBase
+	{
+		public string Name { get; set; }
+		public string Address { get; set; }
+		public string IdentityNumber { get; set; }
+		public string TaxDepartment { get; set; }
+		public string Phone { get; set; }
+		public string Email { get; set; }
+	}
+}
