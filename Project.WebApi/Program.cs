@@ -1,9 +1,12 @@
 
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Project.Application.Services.AppServices;
+using Project.Domain.MainEntities.Identity;
 using Project.Persistance.Context;
-using Project.Presentation;
+using Project.Persistance.Services.AppServices;
 
 namespace Project.WebApi
 {
@@ -16,9 +19,17 @@ namespace Project.WebApi
 			builder.Services.AddDbContext<AppDbContext>(opt => 
 					opt.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerConnection")));
 
+			builder.Services.AddIdentity<AppUser,AppRole>().AddEntityFrameworkStores<AppDbContext>();
+
+			builder.Services.AddScoped<ICompanyService, CompanyService>();
+
+			builder.Services.AddMediatR(typeof(Project.Application.AssemblyReference).Assembly);
+
+			builder.Services.AddAutoMapper(typeof(Persistance.AssemblyReference).Assembly);
+
 			// Add services to the container.
 
-			builder.Services.AddControllers().AddApplicationPart(typeof(AssemblyReference).Assembly);
+			builder.Services.AddControllers().AddApplicationPart(typeof(Project.Presentation.AssemblyReference).Assembly);
 			// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 			builder.Services.AddEndpointsApiExplorer();
 
