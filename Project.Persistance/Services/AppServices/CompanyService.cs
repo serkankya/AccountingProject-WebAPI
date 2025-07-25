@@ -20,6 +20,12 @@ namespace Project.Persistance.Services.AppServices
 		public async Task CreateCompany(CreateCompanyRequest request)
 		{
 			Company company = _mapper.Map<Company>(request);
+			company.Email = "test";
+			company.Phone = "test";
+
+			company.TaxDepartment = "ss";
+			company.Address = "test";
+			company.IdentityNumber = "test";
 			company.Id = Guid.NewGuid().ToString();
 			await _context.Set<Company>().AddAsync(company);
 			await _context.SaveChangesAsync();

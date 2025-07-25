@@ -1,5 +1,3 @@
-
-using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -23,7 +21,8 @@ namespace Project.WebApi
 
 			builder.Services.AddScoped<ICompanyService, CompanyService>();
 
-			builder.Services.AddMediatR(typeof(Project.Application.AssemblyReference).Assembly);
+			builder.Services.AddMediatR(cfg => 
+				cfg.RegisterServicesFromAssembly(typeof(Application.AssemblyReference).Assembly));
 
 			builder.Services.AddAutoMapper(typeof(Persistance.AssemblyReference).Assembly);
 
