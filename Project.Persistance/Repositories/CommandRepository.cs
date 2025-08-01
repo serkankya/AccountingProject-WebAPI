@@ -10,7 +10,6 @@ namespace Project.Persistance.Repositories
 		private static readonly Func<CompanyDbContext, string, Task<T>> GetByIdCompiled =
 			EF.CompileAsyncQuery((CompanyDbContext context, string id) => context.Set<T>().FirstOrDefault(x => x.Id == id));
 
-
 		private CompanyDbContext _context;
 
 		public DbSet<T> Entity { get; set; }
@@ -35,7 +34,6 @@ namespace Project.Persistance.Repositories
 		{
 			Entity.Remove(entity);
 		}
-
 		public async Task RemoveById(string id)
 		{
 			T entity = await GetByIdCompiled(_context, id);

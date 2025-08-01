@@ -2,7 +2,9 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Project.Application.Services.AppServices;
+using Project.Domain;
 using Project.Domain.MainEntities.Identity;
+using Project.Persistance;
 using Project.Persistance.Context;
 using Project.Persistance.Services.AppServices;
 
@@ -20,6 +22,7 @@ namespace Project.WebApi
 			builder.Services.AddIdentity<AppUser,AppRole>().AddEntityFrameworkStores<AppDbContext>();
 
 			builder.Services.AddScoped<ICompanyService, CompanyService>();
+			builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 			builder.Services.AddMediatR(cfg => 
 				cfg.RegisterServicesFromAssembly(typeof(Application.AssemblyReference).Assembly));
