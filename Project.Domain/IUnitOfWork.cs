@@ -4,7 +4,7 @@ namespace Project.Domain
 {
 	public interface IUnitOfWork 
 	{
-		void CreateDbContextInstance(DbContext context);
+		void SetDbContextInstance(DbContext context);
 		Task<int> SaveChangesAsync();
 	}
 }

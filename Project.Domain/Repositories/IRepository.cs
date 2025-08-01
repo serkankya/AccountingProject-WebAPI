@@ -5,7 +5,7 @@ namespace Project.Domain.Repositories
 {
 	public interface IRepository<T> where T : EntityBase
 	{
-		void CreateDbContextInstance(DbContext context);
+		void SetDbContextInstance(DbContext context);
 		DbSet<T> Entity { get; set; }
 	}
 }

@@ -4,8 +4,10 @@ using Microsoft.OpenApi.Models;
 using Project.Application.Services.AppServices;
 using Project.Domain;
 using Project.Domain.MainEntities.Identity;
+using Project.Domain.Repositories.UCOARepositories;
 using Project.Persistance;
 using Project.Persistance.Context;
+using Project.Persistance.Repositories.UCOARepositories;
 using Project.Persistance.Services.AppServices;
 
 namespace Project.WebApi
@@ -22,6 +24,9 @@ namespace Project.WebApi
 			builder.Services.AddIdentity<AppUser,AppRole>().AddEntityFrameworkStores<AppDbContext>();
 
 			builder.Services.AddScoped<ICompanyService, CompanyService>();
+			builder.Services.AddScoped<IUCOACommandRepository, UCOACommandRepository>();
+			builder.Services.AddScoped<IContextService, ContextService>();
+			builder.Services.AddScoped<IUCOAQueryRepository, UCOAQueryRepository>();
 			builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 			builder.Services.AddMediatR(cfg => 
