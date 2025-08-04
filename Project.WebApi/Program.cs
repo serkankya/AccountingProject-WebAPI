@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Project.Application.Services.AppServices;
+using Project.Application.Services.CompanyServices;
 using Project.Domain;
 using Project.Domain.MainEntities.Identity;
 using Project.Domain.Repositories.UCOARepositories;
@@ -9,6 +10,7 @@ using Project.Persistance;
 using Project.Persistance.Context;
 using Project.Persistance.Repositories.UCOARepositories;
 using Project.Persistance.Services.AppServices;
+using Project.Persistance.Services.CompanyServices;
 
 namespace Project.WebApi
 {
@@ -28,6 +30,7 @@ namespace Project.WebApi
 			builder.Services.AddScoped<IContextService, ContextService>();
 			builder.Services.AddScoped<IUCOAQueryRepository, UCOAQueryRepository>();
 			builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+			builder.Services.AddScoped<IUCOAService, UCOAService>();
 
 			builder.Services.AddMediatR(cfg => 
 				cfg.RegisterServicesFromAssembly(typeof(Application.AssemblyReference).Assembly));
