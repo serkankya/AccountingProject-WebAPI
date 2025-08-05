@@ -4,6 +4,6 @@ namespace Project.Application.Abstracts
 {
 	public interface IJwtProvider
 	{
-		Task<string> CreateToken(AppUser user, List<string> roles);
+		Task<string> CreateTokenAsync(AppUser user, List<string> roles);
 	}
 }

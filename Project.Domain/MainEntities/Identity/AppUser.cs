@@ -6,6 +6,6 @@ namespace Project.Domain.MainEntities.Identity
 	{
 		public string FullName { get; set; }
 		public string RefreshToken { get; set; }
-		public string RefreshTokenExpires { get; set; }
+		public DateTime RefreshTokenExpires { get; set; }
 	}
 }
