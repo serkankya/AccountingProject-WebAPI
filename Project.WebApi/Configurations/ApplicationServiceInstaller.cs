@@ -1,5 +1,4 @@
-﻿
-using Project.Application;
+﻿using Project.Application;
 
 namespace Project.WebApi.Configurations
 {

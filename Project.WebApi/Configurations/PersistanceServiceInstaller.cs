@@ -1,5 +1,4 @@
-﻿
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Project.Domain.MainEntities.Identity;
 using Project.Persistance;
 using Project.Persistance.Context;

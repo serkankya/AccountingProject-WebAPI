@@ -1,5 +1,4 @@
-﻿
-using Project.Application.Services.AppServices;
+﻿using Project.Application.Services.AppServices;
 using Project.Application.Services.CompanyServices;
 using Project.Domain;
 using Project.Domain.Repositories.UCOARepositories;
