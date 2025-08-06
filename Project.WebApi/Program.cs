@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Identity;
+using Project.Domain.MainEntities.Identity;
 using Project.WebApi.Configurations;
 
 namespace Project.WebApi

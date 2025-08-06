@@ -2,6 +2,9 @@
 {
 	public sealed class LoginResponse
 	{
-		public string Message { get; set; }  = "Successfull Login!";
+		public string Token { get; set; }
+		public string UserId { get; set; }
+		public string EmailOrUsername { get; set; }
+		public string FullName { get; set; }
 	}
 }
