@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Project.Application.Features.AppFeatures.CompanyFeatures.Commands.CreateCompany;
+using Project.Application.Features.AppFeatures.RoleFeatures.Commands.CreateRole;
 using Project.Application.Features.CompanyFeatures.UCOAFeatures.Commands;
 using Project.Domain.CompanyEntities;
 using Project.Domain.MainEntities;
+using Project.Domain.MainEntities.Identity;
 
 namespace Project.Persistance.Mapping
 {
@@ -12,6 +14,7 @@ namespace Project.Persistance.Mapping
 		{
 			CreateMap<CreateCompanyRequest, Company>().ReverseMap();
 			CreateMap<CreateUCOARequest, UCOA>().ReverseMap();
+			CreateMap<CreateRoleRequest, AppRole>().ReverseMap();
 		}
 	}
 }

@@ -14,6 +14,7 @@ namespace Project.WebApi.Configurations
 		public void Install(IServiceCollection services, IConfiguration configuration)
 		{
 			services.AddScoped<ICompanyService, CompanyService>();
+			services.AddScoped<IRoleService, RoleService>();
 			services.AddScoped<IUCOACommandRepository, UCOACommandRepository>();
 			services.AddScoped<IContextService, ContextService>();
 			services.AddScoped<IUCOAQueryRepository, UCOAQueryRepository>();

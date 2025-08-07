@@ -1,29 +1,28 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+using Project.Application.Services.AppServices;
 using Project.Domain.MainEntities.Identity;
 
 namespace Project.Application.Features.AppFeatures.RoleFeatures.Commands.UpdateRole
 {
 	public sealed class UpdateRoleHandler : IRequestHandler<UpdateRoleRequest, UpdateRoleResponse>
 	{
-		readonly RoleManager<AppRole> _roleManager;
+		readonly IRoleService _roleService;
 
-		public UpdateRoleHandler(RoleManager<AppRole> roleManager)
+		public UpdateRoleHandler(IRoleService roleService)
 		{
-			_roleManager = roleManager;
+			_roleService = roleService;
 		}
 
 		public async Task<UpdateRoleResponse> Handle(UpdateRoleRequest request, CancellationToken cancellationToken)
 		{
-			AppRole role = await _roleManager.FindByIdAsync(request.Id);
+			AppRole role = await _roleService.GetById(request.Id);
 
 			if (role == null)
 				throw new Exception("Role cannot be found.");
 
 			if (role.Code != request.Code)
 			{
-				AppRole code = await _roleManager.Roles.FirstOrDefaultAsync(x=>x.Code == request.Code);
+				AppRole code = await _roleService.GetByCode(request.Code);
 
 				if (code != null)
 					throw new Exception("This code already exists!");
@@ -32,7 +31,7 @@ namespace Project.Application.Features.AppFeatures.RoleFeatures.Commands.UpdateR
 			role.Code = request.Code;
 			role.Name = request.Name;
 
-			await _roleManager.UpdateAsync(role);
+			await _roleService.UpdateAsync(role);
 			return new();
 		}
 	}
