@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Project.Domain.MainEntities.Identity;
 using Project.WebApi.Configurations;
+using Project.WebApi.Middleware;
 
 namespace Project.WebApi
 {
@@ -19,6 +20,8 @@ namespace Project.WebApi
 				app.UseSwagger();
 				app.UseSwaggerUI();
 			}
+
+			app.UseExceptionMiddleware();
 
 			app.UseHttpsRedirection();
 
