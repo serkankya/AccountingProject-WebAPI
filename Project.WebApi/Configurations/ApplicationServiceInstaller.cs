@@ -1,4 +1,7 @@
-﻿using Project.Application;
+﻿using FluentValidation;
+using MediatR;
+using Project.Application;
+using Project.Application.Behavior;
 
 namespace Project.WebApi.Configurations
 {
@@ -8,6 +11,10 @@ namespace Project.WebApi.Configurations
 		{
 			services.AddMediatR(cfg =>
 				cfg.RegisterServicesFromAssembly(typeof(AssemblyReference).Assembly));
+
+			services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+
+			services.AddValidatorsFromAssembly(typeof(AssemblyReference).Assembly);
 		}
 	}
 }
