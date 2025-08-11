@@ -1,4 +1,6 @@
 ﻿
+using FluentValidation;
+
 namespace Project.WebApi.Middleware
 {
 	public class ExceptionMiddleware : IMiddleware
@@ -19,6 +21,15 @@ namespace Project.WebApi.Middleware
 		{
 			context.Response.ContentType = "application/json";
 			context.Response.StatusCode = (int)StatusCodes.Status500InternalServerError;
+
+			if(ex.GetType() == typeof(ValidationException))
+			{
+				return context.Response.WriteAsync(new ValidationErrorDetails
+				{
+					Errors = ((ValidationException)ex).Errors.Select(x => x.PropertyName),
+					StatusCode = context.Response.StatusCode
+				}.ToString());
+			}
 
 			return context.Response.WriteAsync(new ErrorResult
 			{
