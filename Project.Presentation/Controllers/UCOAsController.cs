@@ -13,9 +13,9 @@ namespace Project.Presentation.Controllers
 		}
 
 		[HttpPost("[action]")]
-		public async Task<IActionResult> CreateUCOA(CreateUCOACommand request)
+		public async Task<IActionResult> CreateUCOA(CreateUCOACommand request, CancellationToken cancellationToken)
 		{
-			CreateUCOACommandResponse response = await _mediator.Send(request);
+			CreateUCOACommandResponse response = await _mediator.Send(request, cancellationToken);
 			return Ok(response);
 		}
 	}

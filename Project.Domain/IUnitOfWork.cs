@@ -5,6 +5,6 @@ namespace Project.Domain
 	public interface IUnitOfWork 
 	{
 		void SetDbContextInstance(DbContext context);
-		Task<int> SaveChangesAsync();
+		Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 	}
 }

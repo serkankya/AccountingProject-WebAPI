@@ -17,8 +17,8 @@ namespace Project.Persistance.Context
 					ConnectionString =
 						$"Data Source={company.ServerName};" +
 						$"Initial Catalog = {company.DatabaseName}; " +
-						$"User Id = {company.UserId}; " +
-						$"Password = {company.Password}; " +
+						$"User Id = {company.ServerUserId}; " +
+						$"Password = {company.ServerPassword}; " +
 						$"Integrated Security=True;" +
 						$"Connect Timeout=30;" +
 						$"Encrypt=False;" +

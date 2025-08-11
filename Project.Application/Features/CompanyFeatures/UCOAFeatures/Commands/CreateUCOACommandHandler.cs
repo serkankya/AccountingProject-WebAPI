@@ -15,7 +15,7 @@ namespace Project.Application.Features.CompanyFeatures.UCOAFeatures.Commands
 
 		public async Task<CreateUCOACommandResponse> Handle(CreateUCOACommand request, CancellationToken cancellationToken)
 		{
-			await _ucoaService.CreateUCOAAsync(request);
+			await _ucoaService.CreateUCOAAsync(request,cancellationToken);
 			return new();
 		}
 	}

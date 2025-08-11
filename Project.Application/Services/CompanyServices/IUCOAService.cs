@@ -4,6 +4,6 @@ namespace Project.Application.Services.CompanyServices
 {
 	public interface IUCOAService
 	{
-		Task CreateUCOAAsync(CreateUCOACommand request);
+		Task CreateUCOAAsync(CreateUCOACommand request, CancellationToken cancellationToken);
 	}
 }

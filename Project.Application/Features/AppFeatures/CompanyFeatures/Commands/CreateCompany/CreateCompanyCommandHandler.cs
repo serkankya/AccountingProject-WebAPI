@@ -21,7 +21,7 @@ namespace Project.Application.Features.AppFeatures.CompanyFeatures.Commands.Crea
 			if (company != null)
 				throw new Exception("This company name is already exist!");
 
-			await _companyService.CreateCompany(request);
+			await _companyService.CreateCompany(request, cancellationToken);
 			return new();
 		}
 	}

@@ -24,7 +24,7 @@ namespace Project.Persistance.Services.CompanyServices
 			_mapper = mapper;
 		}
 
-		public async Task CreateUCOAAsync(CreateUCOACommand request)
+		public async Task CreateUCOAAsync(CreateUCOACommand request, CancellationToken cancellationToken)
 		{
 			_companyDbContext = (CompanyDbContext)_contextService.CreateDbContextInstance(request.CompanyId);
 			_repository.SetDbContextInstance(_companyDbContext);
@@ -33,8 +33,8 @@ namespace Project.Persistance.Services.CompanyServices
 			UCOA ucoa =  _mapper.Map<UCOA>(request);
 			ucoa.Id = Guid.NewGuid().ToString();
 
-			await _repository.AddAsync(ucoa);
-			await _unitOfWork.SaveChangesAsync();
+			await _repository.AddAsync(ucoa, cancellationToken);
+			await _unitOfWork.SaveChangesAsync(cancellationToken);
 		}
 	}
 }
