@@ -12,9 +12,9 @@ namespace Project.Persistance.Mapping
 	{
 		public MappingProfile()
 		{
-			CreateMap<CreateCompanyRequest, Company>().ReverseMap();
-			CreateMap<CreateUCOARequest, UCOA>().ReverseMap();
-			CreateMap<CreateRoleRequest, AppRole>().ReverseMap();
+			CreateMap<CreateCompanyCommand, Company>().ReverseMap();
+			CreateMap<CreateUCOACommand, UCOA>().ReverseMap();
+			CreateMap<CreateRoleCommand, AppRole>().ReverseMap();
 		}
 	}
 }

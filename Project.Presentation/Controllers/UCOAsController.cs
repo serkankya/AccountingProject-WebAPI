@@ -13,9 +13,9 @@ namespace Project.Presentation.Controllers
 		}
 
 		[HttpPost("[action]")]
-		public async Task<IActionResult> CreateUCOA(CreateUCOARequest request)
+		public async Task<IActionResult> CreateUCOA(CreateUCOACommand request)
 		{
-			CreateUCOAResponse response = await _mediator.Send(request);
+			CreateUCOACommandResponse response = await _mediator.Send(request);
 			return Ok(response);
 		}
 	}

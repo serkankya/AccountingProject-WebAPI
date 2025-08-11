@@ -24,7 +24,7 @@ namespace Project.Persistance.Services.CompanyServices
 			_mapper = mapper;
 		}
 
-		public async Task CreateUCOAAsync(CreateUCOARequest request)
+		public async Task CreateUCOAAsync(CreateUCOACommand request)
 		{
 			_companyDbContext = (CompanyDbContext)_contextService.CreateDbContextInstance(request.CompanyId);
 			_repository.SetDbContextInstance(_companyDbContext);
