@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Project.Application.Features.AppFeatures.RoleFeatures.Commands.CreateAllRoles;
 using Project.Application.Features.AppFeatures.RoleFeatures.Commands.CreateRole;
 using Project.Application.Features.AppFeatures.RoleFeatures.Commands.DeleteRole;
 using Project.Application.Features.AppFeatures.RoleFeatures.Commands.UpdateRole;
@@ -43,6 +44,14 @@ namespace Project.Presentation.Controllers
 			DeleteRoleCommand request = new DeleteRoleCommand(id);
 
 			DeleteRoleCommandResponse response = await _mediator.Send(request);
+			return Ok(response);
+		}
+
+		[HttpGet("[action]")]
+		public async Task<IActionResult> CreateAllRoles()
+		{
+			CreateAllRolesCommand request = new();
+			CreateAllRolesCommandResponse response = await _mediator.Send(request);
 			return Ok(response);
 		}
 	}
