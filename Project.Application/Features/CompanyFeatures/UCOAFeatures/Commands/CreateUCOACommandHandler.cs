@@ -1,6 +1,6 @@
-﻿using MediatR;
-using Project.Application.Messaging;
+﻿using Project.Application.Messaging;
 using Project.Application.Services.CompanyServices;
+using Project.Domain.CompanyEntities;
 
 namespace Project.Application.Features.CompanyFeatures.UCOAFeatures.Commands
 {
@@ -15,7 +15,12 @@ namespace Project.Application.Features.CompanyFeatures.UCOAFeatures.Commands
 
 		public async Task<CreateUCOACommandResponse> Handle(CreateUCOACommand request, CancellationToken cancellationToken)
 		{
-			await _ucoaService.CreateUCOAAsync(request,cancellationToken);
+			UCOA ucoa = await _ucoaService.GetByCode(request.Code);
+
+			if (ucoa != null)
+				throw new Exception("This code already exists!");
+
+			await _ucoaService.CreateUCOAAsync(request, cancellationToken);
 			return new();
 		}
 	}

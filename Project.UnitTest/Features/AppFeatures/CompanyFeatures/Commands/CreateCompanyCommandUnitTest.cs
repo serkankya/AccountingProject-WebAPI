@@ -4,7 +4,7 @@ using Project.Application.Services.AppServices;
 using Project.Domain.MainEntities;
 using Shouldly;
 
-namespace Project.UnitTest.Features.CompanyFeatures.Commands
+namespace Project.UnitTest.Features.AppFeatures.CompanyFeatures.Commands
 {
 
 	public sealed class CreateCompanyCommandUnitTest

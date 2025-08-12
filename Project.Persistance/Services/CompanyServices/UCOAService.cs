@@ -10,31 +10,38 @@ namespace Project.Persistance.Services.CompanyServices
 {
 	public sealed class UCOAService : IUCOAService
 	{
-		readonly IUCOACommandRepository _repository;
+		readonly IUCOACommandRepository _commandRepository;
+		readonly IUCOAQueryRepository _queryRepository;
 		readonly IContextService _contextService;
 		 CompanyDbContext _companyDbContext;
 		readonly IUnitOfWork _unitOfWork;
 		readonly IMapper _mapper;
 
-		public UCOAService(IUCOACommandRepository repository, IContextService contextService, IUnitOfWork unitOfWork, IMapper mapper)
+		public UCOAService(IUCOACommandRepository commandRepository, IContextService contextService, IUnitOfWork unitOfWork, IMapper mapper, IUCOAQueryRepository queryRepository)
 		{
-			_repository = repository;
+			_commandRepository = commandRepository;
 			_contextService = contextService;
 			_unitOfWork = unitOfWork;
 			_mapper = mapper;
+			_queryRepository = queryRepository;
 		}
 
 		public async Task CreateUCOAAsync(CreateUCOACommand request, CancellationToken cancellationToken)
 		{
 			_companyDbContext = (CompanyDbContext)_contextService.CreateDbContextInstance(request.CompanyId);
-			_repository.SetDbContextInstance(_companyDbContext);
+			_commandRepository.SetDbContextInstance(_companyDbContext);
 			_unitOfWork.SetDbContextInstance(_companyDbContext);
 
 			UCOA ucoa =  _mapper.Map<UCOA>(request);
 			ucoa.Id = Guid.NewGuid().ToString();
 
-			await _repository.AddAsync(ucoa, cancellationToken);
+			await _commandRepository.AddAsync(ucoa, cancellationToken);
 			await _unitOfWork.SaveChangesAsync(cancellationToken);
+		}
+
+		public async Task<UCOA> GetByCode(string code)
+		{
+			return await _queryRepository.GetFirstByExpression(x => x.Code == code);
 		}
 	}
 }
