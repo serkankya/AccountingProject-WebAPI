@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Features\AppFeatures\AppUserFeatures\Queries\" />
     <Folder Include="Features\AppFeatures\CompanyFeatures\Queries\" />
     <Folder Include="Features\CompanyFeatures\UCOAFeatures\Queries\" />
   </ItemGroup>
@@ -14,6 +15,7 @@
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="12.0.0" />
     <PackageReference Include="MediatR" Version="13.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
   <ItemGroup>

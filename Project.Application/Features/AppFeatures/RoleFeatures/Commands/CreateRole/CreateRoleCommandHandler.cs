@@ -20,7 +20,6 @@ namespace Project.Application.Features.AppFeatures.RoleFeatures.Commands.CreateR
 			if (role != null)
 				throw new Exception("This role already exists!");
 
-
 			await _roleService.AddAsync(request);
 			return new();
 		}

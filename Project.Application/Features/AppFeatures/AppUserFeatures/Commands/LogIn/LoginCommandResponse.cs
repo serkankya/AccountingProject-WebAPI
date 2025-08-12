@@ -1,4 +1,4 @@
-﻿namespace Project.Application.Features.AppFeatures.AppUserFeatures.LogIn
+﻿namespace Project.Application.Features.AppFeatures.AppUserFeatures.Commands.LogIn
 {
 	public sealed record LoginResponse
 		(string Token,

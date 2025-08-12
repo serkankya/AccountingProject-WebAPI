@@ -1,5 +1,4 @@
-﻿using MediatR;
-using Project.Application.Messaging;
+﻿using Project.Application.Messaging;
 using Project.Application.Services.AppServices;
 using Project.Domain.MainEntities;
 

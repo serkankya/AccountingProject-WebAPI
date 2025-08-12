@@ -4,7 +4,7 @@ using Project.Application.Abstracts;
 using Project.Application.Messaging;
 using Project.Domain.MainEntities.Identity;
 
-namespace Project.Application.Features.AppFeatures.AppUserFeatures.LogIn
+namespace Project.Application.Features.AppFeatures.AppUserFeatures.Commands.LogIn
 {
 	public class LoginHandler : ICommandHandler<LoginCommand, LoginResponse>
 	{
