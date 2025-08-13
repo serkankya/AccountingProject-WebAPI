@@ -4,7 +4,7 @@ using Project.Domain.Repositories.GenericRepositories.CompanyDbContext;
 
 namespace Project.Persistance.Repositories.GenericRepositories.CompanyDbContext
 {
-	public sealed class CompanyCommandRepository<T> : ICompanyCommandRepository<T> where T : EntityBase
+	public  class CompanyDbCommandRepository<T> : ICompanyDbCommandRepository<T> where T : EntityBase
 	{
 		private static readonly Func<Context.CompanyDbContext, string, Task<T>> GetByIdCompiled =
 			EF.CompileAsyncQuery((Context.CompanyDbContext context, string id) => context.Set<T>().FirstOrDefault(x => x.Id == id));

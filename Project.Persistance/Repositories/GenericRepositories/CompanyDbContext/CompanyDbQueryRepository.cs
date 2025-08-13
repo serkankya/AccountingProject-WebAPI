@@ -1,21 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Project.Domain.Abstract;
 using Project.Domain.Repositories.GenericRepositories.CompanyDbContext;
-using Project.Persistance.Context;
 using System.Linq.Expressions;
 
 namespace Project.Persistance.Repositories.GenericRepositories.CompanyDbContext
 {
-	public sealed class CompanyQueryRepository<T> : ICompanyQueryRepository<T> where T : EntityBase
+	public class CompanyDbQueryRepository<T> : ICompanyDbQueryRepository<T> where T : EntityBase
 	{
 		private static readonly Func<Context.CompanyDbContext, string, bool, Task<T>> GetByIdCompiled =
 			EF.CompileAsyncQuery((Context.CompanyDbContext context, string id, bool isTracking) => isTracking == true ? context.Set<T>().FirstOrDefault(x => x.Id == id) : context.Set<T>().AsNoTracking().FirstOrDefault(x => x.Id == id));
 
 		private static readonly Func<Context.CompanyDbContext, bool, Task<T>> GetFirstCompiled =
 			EF.CompileAsyncQuery((Context.CompanyDbContext context, bool isTracking) => isTracking == true ? context.Set<T>().FirstOrDefault() : context.Set<T>().AsNoTracking().FirstOrDefault());
-
-		private static readonly Func<Context.CompanyDbContext, Expression<Func<T, bool>>, bool, Task<T>> GetFirstByExpressionCompiled =
-			EF.CompileAsyncQuery((Context.CompanyDbContext context, Expression<Func<T, bool>> expression, bool isTracking) => isTracking == true ? context.Set<T>().FirstOrDefault(expression) : context.Set<T>().AsNoTracking().FirstOrDefault(expression));
 
 		private Context.CompanyDbContext _context;
 
@@ -49,7 +45,18 @@ namespace Project.Persistance.Repositories.GenericRepositories.CompanyDbContext
 
 		public async Task<T> GetFirstByExpression(Expression<Func<T, bool>> expression, bool isTracking = true)
 		{
-			return await GetFirstByExpressionCompiled(_context, expression, isTracking);
+			T entity = null;
+
+			if (isTracking == false)
+			{
+				entity = await Entity.AsNoTracking().Where(expression).FirstOrDefaultAsync();
+			}
+			else
+			{
+				entity = await Entity.Where(expression).FirstOrDefaultAsync();
+			}
+
+			return entity;
 		}
 
 		public IQueryable<T> GetWhere(Expression<Func<T, bool>> expression, bool isTracking = true)

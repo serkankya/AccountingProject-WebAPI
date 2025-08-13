@@ -1,16 +1,18 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Project.Domain.Abstract;
 using Project.Domain.Repositories.GenericRepositories.AppDbContext;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Linq.Expressions;
 
 namespace Project.Persistance.Repositories.GenericRepositories.AppDbContext
 {
-	public sealed class AppQueryRepository<T> : IAppQueryRepository<T> where T : EntityBase
+	public class AppQueryRepository<T> : IAppQueryRepository<T> where T : EntityBase
 	{
+		private static readonly Func<Context.AppDbContext, string, bool, Task<T>> GetByIdCompiled =
+			EF.CompileAsyncQuery((Context.AppDbContext context, string id, bool isTracking) => isTracking == true ? context.Set<T>().FirstOrDefault(x => x.Id == id) : context.Set<T>().AsNoTracking().FirstOrDefault(x => x.Id == id));
+
+		private static readonly Func<Context.AppDbContext, bool, Task<T>> GetFirstCompiled =
+			EF.CompileAsyncQuery((Context.AppDbContext context, bool isTracking) => isTracking == true ? context.Set<T>().FirstOrDefault() : context.Set<T>().AsNoTracking().FirstOrDefault());
+
 		private readonly Context.AppDbContext _context;
 
 		public AppQueryRepository(Context.AppDbContext context)
@@ -23,27 +25,48 @@ namespace Project.Persistance.Repositories.GenericRepositories.AppDbContext
 
 		public IQueryable<T> GetAll(bool isTracking = true)
 		{
-			throw new NotImplementedException();
+			var result = Entity.AsQueryable();
+
+			if (isTracking == false)
+				result = result.AsNoTracking();
+
+			return result;
 		}
 
-		public Task<T> GetById(string id, bool isTracking = true)
+		public async Task<T> GetById(string id, bool isTracking = true)
 		{
-			throw new NotImplementedException();
+			return await GetByIdCompiled(_context, id, isTracking);
 		}
 
-		public Task<T> GetFirst(bool isTracking = true)
+		public async Task<T> GetFirst(bool isTracking = true)
 		{
-			throw new NotImplementedException();
+			return await GetFirstCompiled(_context, isTracking);
 		}
 
-		public Task<T> GetFirstByExpression(System.Linq.Expressions.Expression<Func<T, bool>> expression, bool isTracking = true)
+		public async Task<T> GetFirstByExpression(Expression<Func<T, bool>> expression, bool isTracking = true)
 		{
-			throw new NotImplementedException();
+			T entity = null;
+
+			if (isTracking == false)
+			{
+				entity = await Entity.AsNoTracking().Where(expression).FirstOrDefaultAsync();
+			}
+			else
+			{
+				entity = await Entity.Where(expression).FirstOrDefaultAsync();
+			}
+
+			return entity;
 		}
 
-		public IQueryable<T> GetWhere(System.Linq.Expressions.Expression<Func<T, bool>> expression, bool isTracking = true)
+		public IQueryable<T> GetWhere(Expression<Func<T, bool>> expression, bool isTracking = true)
 		{
-			throw new NotImplementedException();
+			var result = Entity.Where(expression);
+
+			if (isTracking == false)
+				result = result.AsNoTracking();
+
+			return result;
 		}
 	}
 }

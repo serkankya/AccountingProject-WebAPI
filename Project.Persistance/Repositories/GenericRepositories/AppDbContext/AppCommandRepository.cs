@@ -4,8 +4,11 @@ using Project.Domain.Repositories.GenericRepositories.AppDbContext;
 
 namespace Project.Persistance.Repositories.GenericRepositories.AppDbContext
 {
-	public sealed class AppCommandRepository<T> : IAppCommandRepository<T> where T : EntityBase
+	public class AppCommandRepository<T> : IAppCommandRepository<T> where T : EntityBase
 	{
+		private static readonly Func<Context.AppDbContext, string, Task<T>> GetByIdCompiled =
+			EF.CompileAsyncQuery((Context.AppDbContext context, string id) => context.Set<T>().FirstOrDefault(x => x.Id == id));
+
 		private readonly Context.AppDbContext _context;
 
 		public AppCommandRepository(Context.AppDbContext context)
@@ -16,39 +19,39 @@ namespace Project.Persistance.Repositories.GenericRepositories.AppDbContext
 
 		public DbSet<T> Entity { get; set; }
 
-		public Task AddAsync(T entity, CancellationToken cancellationToken)
+		public async Task AddAsync(T entity, CancellationToken cancellationToken)
 		{
-			throw new NotImplementedException();
+			await Entity.AddAsync(entity, cancellationToken);
 		}
 
-		public Task AddRangeAsync(IEnumerable<T> entities, CancellationToken cancellationToken)
+		public async Task AddRangeAsync(IEnumerable<T> entities, CancellationToken cancellationToken)
 		{
-			throw new NotImplementedException();
+			await Entity.AddRangeAsync(entities, cancellationToken);
 		}
 
 		public void Remove(T entity)
 		{
-			throw new NotImplementedException();
+			Entity.Remove(entity);
 		}
-
-		public Task RemoveById(string id)
+		public async Task RemoveById(string id)
 		{
-			throw new NotImplementedException();
+			T entity = await GetByIdCompiled(_context, id);
+			Remove(entity);
 		}
 
 		public void RemoveRange(IEnumerable<T> entities)
 		{
-			throw new NotImplementedException();
+			Entity.RemoveRange(entities);
 		}
 
 		public void Update(T entity)
 		{
-			throw new NotImplementedException();
+			Entity.Update(entity);
 		}
 
 		public void UpdateRange(IEnumerable<T> entities)
 		{
-			throw new NotImplementedException();
+			Entity.UpdateRange(entities);
 		}
 	}
 }

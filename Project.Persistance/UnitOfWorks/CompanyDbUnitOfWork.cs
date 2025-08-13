@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Project.Domain;
+using Project.Domain.UnitOfWorks;
 using Project.Persistance.Context;
 
-namespace Project.Persistance
+namespace Project.Persistance.UnitOfWorks
 {
-	public sealed class UnitOfWork : IUnitOfWork
+	public sealed class CompanyDbUnitOfWork : ICompanyDbUnitOfWork
 	{
 		private CompanyDbContext _context;
 		public void SetDbContextInstance(DbContext context)

@@ -3,7 +3,8 @@ using Project.Application.Features.CompanyFeatures.UCOAFeatures.Commands;
 using Project.Application.Services.CompanyServices;
 using Project.Domain;
 using Project.Domain.CompanyEntities;
-using Project.Domain.Repositories.UCOARepositories;
+using Project.Domain.Repositories.CompanyDbContext.UCOARepositories;
+using Project.Domain.UnitOfWorks;
 using Project.Persistance.Context;
 
 namespace Project.Persistance.Services.CompanyServices
@@ -14,10 +15,10 @@ namespace Project.Persistance.Services.CompanyServices
 		readonly IUCOAQueryRepository _queryRepository;
 		readonly IContextService _contextService;
 		 CompanyDbContext _companyDbContext;
-		readonly IUnitOfWork _unitOfWork;
+		readonly ICompanyDbUnitOfWork _unitOfWork;
 		readonly IMapper _mapper;
 
-		public UCOAService(IUCOACommandRepository commandRepository, IContextService contextService, IUnitOfWork unitOfWork, IMapper mapper, IUCOAQueryRepository queryRepository)
+		public UCOAService(IUCOACommandRepository commandRepository, IContextService contextService, ICompanyDbUnitOfWork unitOfWork, IMapper mapper, IUCOAQueryRepository queryRepository)
 		{
 			_commandRepository = commandRepository;
 			_contextService = contextService;

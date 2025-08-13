@@ -3,7 +3,7 @@ using Project.Domain.Abstract;
 
 namespace Project.Domain.Repositories.GenericRepositories.CompanyDbContext
 {
-	public interface ICompanyRepository<T> : IRepository<T> where T : EntityBase
+	public interface ICompanyDbRepository<T> : IRepository<T> where T : EntityBase
 	{
 		void SetDbContextInstance(DbContext context);
 	}
