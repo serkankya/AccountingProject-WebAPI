@@ -1,11 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Project.Domain.Abstract;
 
-namespace Project.Domain.Repositories
+namespace Project.Domain.Repositories.GenericRepositories
 {
 	public interface IRepository<T> where T : EntityBase
 	{
-		void SetDbContextInstance(DbContext context);
-		DbSet<T> Entity { get; set; }
+		public DbSet<T> Entity { get; set; }
 	}
 }

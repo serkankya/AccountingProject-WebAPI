@@ -1,22 +1,21 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Project.Domain.Abstract;
-using Project.Domain.Repositories;
-using Project.Persistance.Context;
+using Project.Domain.Repositories.GenericRepositories.CompanyDbContext;
 
-namespace Project.Persistance.Repositories
+namespace Project.Persistance.Repositories.GenericRepositories.CompanyDbContext
 {
-	public class CommandRepository<T> : ICommandRepository<T> where T : EntityBase
+	public sealed class CompanyCommandRepository<T> : ICompanyCommandRepository<T> where T : EntityBase
 	{
-		private static readonly Func<CompanyDbContext, string, Task<T>> GetByIdCompiled =
-			EF.CompileAsyncQuery((CompanyDbContext context, string id) => context.Set<T>().FirstOrDefault(x => x.Id == id));
+		private static readonly Func<Context.CompanyDbContext, string, Task<T>> GetByIdCompiled =
+			EF.CompileAsyncQuery((Context.CompanyDbContext context, string id) => context.Set<T>().FirstOrDefault(x => x.Id == id));
 
-		private CompanyDbContext _context;
+		private Context.CompanyDbContext _context;
 
 		public DbSet<T> Entity { get; set; }
 
 		public void SetDbContextInstance(DbContext context)
 		{
-			_context = (CompanyDbContext)context;
+			_context = (Context.CompanyDbContext)context;
 			Entity = _context.Set<T>();
 		}
 

@@ -1,9 +1,9 @@
 ﻿using Project.Domain.Abstract;
 using System.Linq.Expressions;
 
-namespace Project.Domain.Repositories
+namespace Project.Domain.Repositories.GenericRepositories
 {
-	public interface IQueryRepository<T> : IRepository<T> where T : EntityBase
+	public interface IQueryGenericRepository<T> where T : EntityBase
 	{
 		IQueryable<T> GetAll(bool isTracking = true);
 		IQueryable<T> GetWhere(Expression<Func<T, bool>> expression, bool isTracking = true);

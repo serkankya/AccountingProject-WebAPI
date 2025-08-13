@@ -1,8 +1,8 @@
 ﻿using Project.Domain.Abstract;
 
-namespace Project.Domain.Repositories
+namespace Project.Domain.Repositories.GenericRepositories
 {
-	public interface ICommandRepository<T> : IRepository<T> where T : EntityBase
+	public interface ICommandGenericRepository<T> where T : EntityBase
 	{
 		Task AddAsync(T entity, CancellationToken cancellationToken);
 		Task AddRangeAsync(IEnumerable<T> entities, CancellationToken cancellationToken);
