@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Design;
 using Project.Domain.Abstract;
 using Project.Domain.MainEntities;
 using Project.Domain.MainEntities.Identity;
-using System.Globalization;
 
 namespace Project.Persistance.Context
 {
@@ -16,6 +15,8 @@ namespace Project.Persistance.Context
 		}
 
 		public DbSet<Company> Companies { get; set; }
+		public DbSet<MainRole> MainRoles { get; set; }
+		public DbSet<MainRoleAndRole> MainRoleAndRoles { get; set; }
 		public DbSet<UserCompany> UserCompanies { get; set; }
 
 		public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
