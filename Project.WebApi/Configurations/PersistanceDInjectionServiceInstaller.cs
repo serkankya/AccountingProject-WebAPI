@@ -2,10 +2,12 @@
 using Project.Application.Services.CompanyServices;
 using Project.Domain;
 using Project.Domain.Repositories.AppDbContext.CompanyRepositories;
+using Project.Domain.Repositories.AppDbContext.MainRoleRepositories;
 using Project.Domain.Repositories.CompanyDbContext.UCOARepositories;
 using Project.Domain.UnitOfWorks;
 using Project.Persistance;
 using Project.Persistance.Repositories.AppDbContext.CompanyRepositories;
+using Project.Persistance.Repositories.AppDbContext.MainRoleRepositories;
 using Project.Persistance.Repositories.CompanyDbContext.UCOARepositories;
 using Project.Persistance.Services.AppServices;
 using Project.Persistance.Services.CompanyServices;
@@ -28,6 +30,9 @@ namespace Project.WebApi.Configurations
 			services.AddScoped<ICompanyQueryRepository, CompanyQueryRepository>();
 			services.AddScoped<ICompanyDbUnitOfWork, CompanyDbUnitOfWork>();
 			services.AddScoped<IAppUnitOfWork, AppUnitOfWork>();
+			services.AddScoped<IMainRoleService, MainRoleService>();
+			services.AddScoped<IMainRoleCommandRepository, MainRoleCommandRepository>();
+			services.AddScoped<IMainRoleQueryRepository, MainRoleQueryRepository>();
 		}
 	}
 }
