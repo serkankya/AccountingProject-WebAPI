@@ -15,9 +15,9 @@ namespace Project.Application.Features.AppFeatures.MainRoleFeatures.Commands.Cre
 
 		public async Task<CreateMainRoleCommandResponse> Handle(CreateMainRoleCommand request, CancellationToken cancellationToken)
 		{
-			MainRole checkMainRoleTitle = await _mainRoleService.GetByTitleAndCompanyId(request.Title, request.CompanyId);
+			MainRole checkMainRoleTitle = await _mainRoleService.GetByTitleAndCompanyId(request.Title, request.CompanyId, cancellationToken);
 
-			if(checkMainRoleTitle != null)
+			if (checkMainRoleTitle != null)
 				throw new Exception("This role already exists!");
 
 			MainRole mainRole = new(
@@ -27,9 +27,9 @@ namespace Project.Application.Features.AppFeatures.MainRoleFeatures.Commands.Cre
 				companyId: request.CompanyId
 				);
 
-			await _mainRoleService.CreateAsync(MainRole);
+			await _mainRoleService.CreateAsync(mainRole, cancellationToken);
 
-			return new(); 
+			return new();
 		}
 	}
 }

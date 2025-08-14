@@ -9,7 +9,7 @@ namespace Project.Application.Services.AppServices
 		Task AddRangeAsync(IEnumerable<AppRole> roles);
 		Task UpdateAsync(AppRole appRole);
 		Task DeleteAsync(AppRole appRole);
-		Task<IList<AppRole>> GetAllRolesAsync();
+		Task<IList<AppRole>> GetStaticRolesAsync();
 		Task<AppRole> GetById(string id);
 		Task<AppRole> GetByCode(string code);
 	}

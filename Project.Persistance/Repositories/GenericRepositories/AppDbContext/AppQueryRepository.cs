@@ -43,17 +43,17 @@ namespace Project.Persistance.Repositories.GenericRepositories.AppDbContext
 			return await GetFirstCompiled(_context, isTracking);
 		}
 
-		public async Task<T> GetFirstByExpression(Expression<Func<T, bool>> expression, bool isTracking = true)
+		public async Task<T> GetFirstByExpression(Expression<Func<T, bool>> expression, CancellationToken cancellationToken, bool isTracking = true)
 		{
 			T entity = null;
 
 			if (isTracking == false)
 			{
-				entity = await Entity.AsNoTracking().Where(expression).FirstOrDefaultAsync();
+				entity = await Entity.AsNoTracking().Where(expression).FirstOrDefaultAsync(cancellationToken);
 			}
 			else
 			{
-				entity = await Entity.Where(expression).FirstOrDefaultAsync();
+				entity = await Entity.Where(expression).FirstOrDefaultAsync(cancellationToken);
 			}
 
 			return entity;

@@ -1,4 +1,5 @@
-﻿using Project.Domain.MainEntities.Identity;
+﻿using Project.Domain.MainEntities;
+using Project.Domain.MainEntities.Identity;
 
 namespace Project.Domain.Roles
 {
@@ -38,6 +39,29 @@ namespace Project.Domain.Roles
 			};
 
 			return appRoles;
+		}
+
+		public static List<MainRole> GetStaticMainRoles()
+		{
+			List<MainRole> mainRoles = new List<MainRole>
+			{
+				new MainRole(
+					id: Guid.NewGuid().ToString(),
+					title: "Admin",
+					isRoleCreatedByAdmin: true),
+
+				new MainRole(
+					id: Guid.NewGuid().ToString(),
+					title: "Manager",
+					isRoleCreatedByAdmin: true),
+
+				new MainRole(
+					id: Guid.NewGuid().ToString(),
+					title: "User",
+					isRoleCreatedByAdmin: true)
+			};
+
+			return mainRoles;
 		}
 
 		public static string UCOA = "Hesap Planı";
