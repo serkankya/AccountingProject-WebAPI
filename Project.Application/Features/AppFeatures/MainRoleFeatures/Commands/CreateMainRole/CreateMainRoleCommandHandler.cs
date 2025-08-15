@@ -23,7 +23,7 @@ namespace Project.Application.Features.AppFeatures.MainRoleFeatures.Commands.Cre
 			MainRole mainRole = new(
 				id: Guid.NewGuid().ToString(),
 				title: request.Title,
-				isRoleCreatedByAdmin: request.IsRoleCreatedByAdmin,
+				isRoleCreatedByAdmin: request.CompanyId != null ? false : true,
 				companyId: request.CompanyId
 				);
 

@@ -40,5 +40,10 @@ namespace Project.Persistance.Services.AppServices
 		{
 			return await _mainRoleQueryRepository.GetFirstByExpression(x => x.Title == title && x.CompanyId == companyId, cancellationToken, false);
 		}
+
+		public async Task RemoveById(string Id)
+		{
+			await _mainRoleCommandRepository.RemoveById(Id);
+		}
 	}
 }

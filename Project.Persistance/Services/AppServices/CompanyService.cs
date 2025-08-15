@@ -37,6 +37,11 @@ namespace Project.Persistance.Services.AppServices
 			await _appUnitOfWork.SaveChangesAsync(cancellationToken);
 		}
 
+		public IQueryable<Company> GetAll()
+		{
+			return _companyQueryRepository.GetAll();
+		}
+
 		public async Task MigrateCompanyDatabases()
 		{
 			var companies = await _companyQueryRepository.GetAll().ToListAsync();

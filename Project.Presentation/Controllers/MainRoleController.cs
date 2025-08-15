@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Project.Application.Features.AppFeatures.MainRoleFeatures.Commands.CreateMainRole;
 using Project.Application.Features.AppFeatures.MainRoleFeatures.Commands.CreateStaticMainRoles;
+using Project.Application.Features.AppFeatures.MainRoleFeatures.Commands.RemoveMainRole;
 using Project.Application.Features.AppFeatures.MainRoleFeatures.Queries.GetAllMainRoles;
 using Project.Presentation.Abstract;
 
@@ -14,7 +15,7 @@ namespace Project.Presentation.Controllers
 		}
 
 		[HttpPost("[action]")]
-		public async Task<IActionResult> CreateMainRole(CreateMainRoleCommand request, CancellationToken cancellationToken)
+		public async Task<IActionResult> Create(CreateMainRoleCommand request, CancellationToken cancellationToken)
 		{
 			CreateMainRoleCommandResponse response = await _mediator.Send(request, cancellationToken);
 			return Ok(response);
@@ -30,9 +31,23 @@ namespace Project.Presentation.Controllers
 		}
 
 		[HttpPost("[action]")]
-		public async Task<IActionResult> GetAllMainRoles(GetAllMainRolesQuery request)
+		public async Task<IActionResult> GetAll(GetAllMainRolesQuery request)
 		{
-			GetAllMainRolesQueryResponse response = await _mediator.Send(request, default);
+			GetAllMainRolesQueryResponse response = await _mediator.Send(request);
+			return Ok(response);
+		}
+
+		[HttpPost("[action]")]
+		public async Task<IActionResult> RemoveById(RemoveByIdMainRoleCommand request)
+		{
+			RemoveByIdMainRoleCommandResponse response = await _mediator.Send(request);
+			return Ok(response);
+		}
+
+		[HttpPost("[action]")]
+		public async Task<IActionResult> Update(UpdateMainRoleCommand request)
+		{
+			UpdateMainRoleCommandResponse response = await _mediator.Send(request);
 			return Ok(response);
 		}
 	}

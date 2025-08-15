@@ -8,5 +8,6 @@ namespace Project.Application.Services.AppServices
 		Task CreateCompany(CreateCompanyCommand request, CancellationToken cancellationToken);
 		Task<Company?> CheckMigrationIfExists(string name, CancellationToken cancellationToken);
 		Task MigrateCompanyDatabases();
+		IQueryable<Company> GetAll();
 	}
 }

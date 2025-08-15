@@ -31,7 +31,6 @@ namespace Project.UnitTest.Features.AppFeatures.MainRoleFeatures
 		{
 			CreateMainRoleCommand request = new(
 				Title: "Admin",
-				IsRoleCreatedByAdmin: false,
 				CompanyId: "");
 
 			var handler = new CreateMainRoleCommandHandler(_mainRoleService.Object);

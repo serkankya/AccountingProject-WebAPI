@@ -1,4 +1,5 @@
-﻿using Project.Domain.MainEntities;
+﻿using Azure.Core;
+using Project.Domain.MainEntities;
 
 namespace Project.Application.Services.AppServices
 {
@@ -8,5 +9,6 @@ namespace Project.Application.Services.AppServices
 		Task CreateAsync(MainRole mainRole, CancellationToken cancellationToken);
 		Task CreateRangeAsync(List<MainRole> mainRoles, CancellationToken cancellationToken);
 		IQueryable<MainRole> GetAllMainRoles();
+		Task RemoveById(string Id);
 	}
 }

@@ -4,6 +4,5 @@ namespace Project.Application.Features.AppFeatures.MainRoleFeatures.Commands.Cre
 {
 	public sealed record CreateMainRoleCommand(
 		string Title,
-		bool IsRoleCreatedByAdmin = false,
 		string CompanyId = null) : ICommand<CreateMainRoleCommandResponse>;
 }
