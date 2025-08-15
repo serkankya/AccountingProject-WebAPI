@@ -37,7 +37,7 @@ namespace Project.Persistance.Services.AppServices
 			await _roleManager.DeleteAsync(appRole);
 		}
 
-		public async Task<IList<AppRole>> GetStaticRolesAsync()
+		public async Task<IList<AppRole>> GetAllRolesAsync()
 		{
 			IList<AppRole> roles = await _roleManager.Roles.ToListAsync();
 			return roles;

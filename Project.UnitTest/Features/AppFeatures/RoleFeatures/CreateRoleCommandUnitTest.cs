@@ -4,7 +4,7 @@ using Project.Application.Services.AppServices;
 using Project.Domain.MainEntities.Identity;
 using Shouldly;
 
-namespace Project.UnitTest.Features.AppFeatures.RoleFeatures.Commands
+namespace Project.UnitTest.Features.AppFeatures.RoleFeatures
 {
 	public sealed class CreateRoleCommandUnitTest
 	{

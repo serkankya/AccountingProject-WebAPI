@@ -24,6 +24,12 @@ namespace Project.Persistance.Services.AppServices
 			await _unitOfWork.SaveChangesAsync(cancellationToken);
 		}
 
+		public async Task CreateRangeAsync(List<MainRole> mainRoles, CancellationToken cancellationToken)
+		{
+			await _mainRoleCommandRepository.AddRangeAsync(mainRoles,cancellationToken);
+			await _unitOfWork.SaveChangesAsync(cancellationToken);	
+		}
+
 		public async Task<MainRole> GetByTitleAndCompanyId(string title, string companyId, CancellationToken cancellationToken)
 		{
 			return await _mainRoleQueryRepository.GetFirstByExpression(x => x.Title == title && x.CompanyId == companyId, cancellationToken, false);

@@ -4,7 +4,7 @@ using Project.Application.Services.CompanyServices;
 using Project.Domain.CompanyEntities;
 using Shouldly;
 
-namespace Project.UnitTest.Features.CompanyFeatures.UCOAFeatures.Commands
+namespace Project.UnitTest.Features.CompanyFeatures.UCOAFeatures
 {
 	public sealed class CreateUCOACommandUnitTest
 	{
@@ -18,7 +18,7 @@ namespace Project.UnitTest.Features.CompanyFeatures.UCOAFeatures.Commands
 		[Fact]	
 		public async Task UCOACodeShouldBeNull()
 		{
-			UCOA ucoa = await _ucoaService.Object.GetByCode("Test Code");
+			UCOA ucoa = await _ucoaService.Object.GetByCode("Test Code",default);
 			ucoa.ShouldBeNull();
 		}
 

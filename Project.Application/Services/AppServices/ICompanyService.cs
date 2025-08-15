@@ -6,7 +6,7 @@ namespace Project.Application.Services.AppServices
 	public interface ICompanyService
 	{
 		Task CreateCompany(CreateCompanyCommand request, CancellationToken cancellationToken);
-		Task<Company?> CheckMigrationIfExists(string name);
+		Task<Company?> CheckMigrationIfExists(string name, CancellationToken cancellationToken);
 		Task MigrateCompanyDatabases();
 	}
 }

@@ -15,7 +15,7 @@ namespace Project.Application.Features.AppFeatures.CompanyFeatures.Commands.Crea
 
 		public async Task<CreateCompanyCommandResponse> Handle(CreateCompanyCommand request, CancellationToken cancellationToken)
 		{
-			Company company = await _companyService.CheckMigrationIfExists(request.Name);
+			Company company = await _companyService.CheckMigrationIfExists(request.Name, cancellationToken);
 
 			if (company != null)
 				throw new Exception("This company name is already exist!");

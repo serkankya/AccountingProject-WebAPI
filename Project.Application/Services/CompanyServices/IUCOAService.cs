@@ -6,6 +6,6 @@ namespace Project.Application.Services.CompanyServices
 	public interface IUCOAService
 	{
 		Task CreateUCOAAsync(CreateUCOACommand request, CancellationToken cancellationToken);
-		Task<UCOA> GetByCode(string code);	
+		Task<UCOA> GetByCode(string code, CancellationToken cancellationToken);
 	}
 }

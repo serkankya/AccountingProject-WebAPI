@@ -4,7 +4,7 @@ using Project.Application.Services.AppServices;
 using Project.Domain.MainEntities.Identity;
 using Shouldly;
 
-namespace Project.UnitTest.Features.AppFeatures.RoleFeatures.Commands
+namespace Project.UnitTest.Features.AppFeatures.RoleFeatures
 {
 	public sealed class UpdateRoleCommandUnitTest
 	{
@@ -24,7 +24,7 @@ namespace Project.UnitTest.Features.AppFeatures.RoleFeatures.Commands
 		[Fact]
 		public async Task RoleCodeShouldBeNull()
 		{
-			AppRole role = (await _roleService.Object.GetByCode("Test Code")!);
+			AppRole role = await _roleService.Object.GetByCode("Test Code")!;
 			role.ShouldBeNull();
 		}
 

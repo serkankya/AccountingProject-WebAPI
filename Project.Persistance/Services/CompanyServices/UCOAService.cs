@@ -14,7 +14,7 @@ namespace Project.Persistance.Services.CompanyServices
 		readonly IUCOACommandRepository _commandRepository;
 		readonly IUCOAQueryRepository _queryRepository;
 		readonly IContextService _contextService;
-		 CompanyDbContext _companyDbContext;
+		CompanyDbContext _companyDbContext;
 		readonly ICompanyDbUnitOfWork _unitOfWork;
 		readonly IMapper _mapper;
 
@@ -33,16 +33,16 @@ namespace Project.Persistance.Services.CompanyServices
 			_commandRepository.SetDbContextInstance(_companyDbContext);
 			_unitOfWork.SetDbContextInstance(_companyDbContext);
 
-			UCOA ucoa =  _mapper.Map<UCOA>(request);
+			UCOA ucoa = _mapper.Map<UCOA>(request);
 			ucoa.Id = Guid.NewGuid().ToString();
 
 			await _commandRepository.AddAsync(ucoa, cancellationToken);
 			await _unitOfWork.SaveChangesAsync(cancellationToken);
 		}
 
-		public async Task<UCOA> GetByCode(string code)
+		public async Task<UCOA> GetByCode(string code, CancellationToken cancellationToken)
 		{
-			return await _queryRepository.GetFirstByExpression(x => x.Code == code);
+			return await _queryRepository.GetFirstByExpression(x => x.Code == code, cancellationToken);
 		}
 	}
 }

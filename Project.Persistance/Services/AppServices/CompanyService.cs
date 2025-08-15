@@ -24,9 +24,9 @@ namespace Project.Persistance.Services.AppServices
 			_appUnitOfWork = appUnitOfWork;
 		}
 
-		public async Task<Company?> CheckMigrationIfExists(string name)
+		public async Task<Company?> CheckMigrationIfExists(string name, CancellationToken cancellationToken)
 		{
-			return await _companyQueryRepository.GetFirstByExpression(x => x.Name == name);
+			return await _companyQueryRepository.GetFirstByExpression(x => x.Name == name, cancellationToken, false);
 		}
 
 		public async Task CreateCompany(CreateCompanyCommand request, CancellationToken cancellationToken)

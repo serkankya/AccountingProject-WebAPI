@@ -4,7 +4,7 @@ using Project.Application.Services.AppServices;
 using Project.Domain.MainEntities;
 using Shouldly;
 
-namespace Project.UnitTest.Features.AppFeatures.CompanyFeatures.Commands
+namespace Project.UnitTest.Features.AppFeatures.CompanyFeatures
 {
 
 	public sealed class CreateCompanyCommandUnitTest
@@ -19,7 +19,7 @@ namespace Project.UnitTest.Features.AppFeatures.CompanyFeatures.Commands
 		[Fact]
 		public async Task CompanyShouldBeNull()
 		{
-			Company company = (await _companyService.Object.CheckMigrationIfExists("Test Company Ltd"))!;
+			Company company = (await _companyService.Object.CheckMigrationIfExists("Test Company Ltd", default))!;
 			company.ShouldBeNull();
 		}
 

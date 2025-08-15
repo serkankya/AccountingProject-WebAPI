@@ -15,7 +15,7 @@ namespace Project.Application.Features.CompanyFeatures.UCOAFeatures.Commands
 
 		public async Task<CreateUCOACommandResponse> Handle(CreateUCOACommand request, CancellationToken cancellationToken)
 		{
-			UCOA ucoa = await _ucoaService.GetByCode(request.Code);
+			UCOA ucoa = await _ucoaService.GetByCode(request.Code, cancellationToken);
 
 			if (ucoa != null)
 				throw new Exception("This code already exists!");
