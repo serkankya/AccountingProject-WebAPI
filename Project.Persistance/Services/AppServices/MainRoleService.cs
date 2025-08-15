@@ -2,6 +2,7 @@
 using Project.Domain.MainEntities;
 using Project.Domain.Repositories.AppDbContext.MainRoleRepositories;
 using Project.Domain.UnitOfWorks;
+using System.Threading.Tasks;
 
 namespace Project.Persistance.Services.AppServices
 {
@@ -9,25 +10,30 @@ namespace Project.Persistance.Services.AppServices
 	{
 		readonly IMainRoleCommandRepository _mainRoleCommandRepository;
 		readonly IMainRoleQueryRepository _mainRoleQueryRepository;
-		readonly IUnitOfWork _unitOfWork;
+		readonly IAppUnitOfWork _appUnitOfWork;
 
-		public MainRoleService(IMainRoleCommandRepository mainRoleCommandRepository, IMainRoleQueryRepository mainRoleQueryRepository, IUnitOfWork unitOfWork)
+		public MainRoleService(IMainRoleCommandRepository mainRoleCommandRepository, IMainRoleQueryRepository mainRoleQueryRepository, IAppUnitOfWork appUnitOfWork)
 		{
 			_mainRoleCommandRepository = mainRoleCommandRepository;
 			_mainRoleQueryRepository = mainRoleQueryRepository;
-			_unitOfWork = unitOfWork;
+			_appUnitOfWork = appUnitOfWork;
 		}
 
 		public async Task CreateAsync(MainRole mainRole, CancellationToken cancellationToken)
 		{
 			await _mainRoleCommandRepository.AddAsync(mainRole, cancellationToken);
-			await _unitOfWork.SaveChangesAsync(cancellationToken);
+			await _appUnitOfWork.SaveChangesAsync(cancellationToken);
 		}
 
 		public async Task CreateRangeAsync(List<MainRole> mainRoles, CancellationToken cancellationToken)
 		{
 			await _mainRoleCommandRepository.AddRangeAsync(mainRoles,cancellationToken);
-			await _unitOfWork.SaveChangesAsync(cancellationToken);	
+			await _appUnitOfWork.SaveChangesAsync(cancellationToken);	
+		}
+
+		public IQueryable<MainRole> GetAllMainRoles()
+		{
+			return _mainRoleQueryRepository.GetAll();
 		}
 
 		public async Task<MainRole> GetByTitleAndCompanyId(string title, string companyId, CancellationToken cancellationToken)

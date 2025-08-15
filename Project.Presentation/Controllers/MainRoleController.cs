@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Project.Application.Features.AppFeatures.MainRoleFeatures.Commands.CreateMainRole;
 using Project.Application.Features.AppFeatures.MainRoleFeatures.Commands.CreateStaticMainRoles;
+using Project.Application.Features.AppFeatures.MainRoleFeatures.Queries.GetAllMainRoles;
 using Project.Presentation.Abstract;
 
 namespace Project.Presentation.Controllers
@@ -19,10 +20,19 @@ namespace Project.Presentation.Controllers
 			return Ok(response);
 		}
 
-		[HttpPost]
-		public async Task<IActionResult> CreateStaticMainRole(CreateStaticMainRolesCommand request, CancellationToken cancellationToken)
+		[HttpPost("[action]")]
+		public async Task<IActionResult> CreateStaticMainRole(CancellationToken cancellationToken)
 		{
+			CreateStaticMainRolesCommand request = new(null);
+
 			CreateStaticMainRolesCommandResponse response = await _mediator.Send(request, cancellationToken);
+			return Ok(response);
+		}
+
+		[HttpPost("[action]")]
+		public async Task<IActionResult> GetAllMainRoles(GetAllMainRolesQuery request)
+		{
+			GetAllMainRolesQueryResponse response = await _mediator.Send(request, default);
 			return Ok(response);
 		}
 	}

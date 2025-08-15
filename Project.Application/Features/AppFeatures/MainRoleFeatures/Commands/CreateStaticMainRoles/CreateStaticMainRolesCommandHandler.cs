@@ -24,7 +24,7 @@ namespace Project.Application.Features.AppFeatures.MainRoleFeatures.Commands.Cre
 			{
 				MainRole checkMainRole = await _mainRoleService.GetByTitleAndCompanyId(role.Title, role.CompanyId, cancellationToken);
 
-				if (checkMainRole != null)
+				if (checkMainRole == null)
 				{
 					newMainRoles.Add(role);
 				}
