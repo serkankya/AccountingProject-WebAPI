@@ -8,10 +8,10 @@ namespace Project.Persistance.Repositories.GenericRepositories.AppDbContext
 	public class AppQueryRepository<T> : IAppQueryRepository<T> where T : EntityBase
 	{
 		private static readonly Func<Context.AppDbContext, string, bool, Task<T>> GetByIdCompiled =
-			EF.CompileAsyncQuery((Context.AppDbContext context, string id, bool isTracking) => isTracking == true ? context.Set<T>().FirstOrDefault(x => x.Id == id) : context.Set<T>().AsNoTracking().FirstOrDefault(x => x.Id == id));
+			EF.CompileAsyncQuery((Context.AppDbContext context, string id, bool isTracking) => context.Set<T>().FirstOrDefault(x => x.Id == id));
 
 		private static readonly Func<Context.AppDbContext, bool, Task<T>> GetFirstCompiled =
-			EF.CompileAsyncQuery((Context.AppDbContext context, bool isTracking) => isTracking == true ? context.Set<T>().FirstOrDefault() : context.Set<T>().AsNoTracking().FirstOrDefault());
+			EF.CompileAsyncQuery((Context.AppDbContext context, bool isTracking) => context.Set<T>().FirstOrDefault());
 
 		private readonly Context.AppDbContext _context;
 

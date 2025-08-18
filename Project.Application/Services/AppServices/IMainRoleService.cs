@@ -10,5 +10,7 @@ namespace Project.Application.Services.AppServices
 		Task CreateRangeAsync(List<MainRole> mainRoles, CancellationToken cancellationToken);
 		IQueryable<MainRole> GetAllMainRoles();
 		Task RemoveById(string Id);
+		Task<MainRole> GetById(string Id);
+		Task UpdateAsync(MainRole mainRole);
 	}
 }

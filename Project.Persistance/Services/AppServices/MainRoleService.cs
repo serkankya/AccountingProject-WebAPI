@@ -36,6 +36,11 @@ namespace Project.Persistance.Services.AppServices
 			return _mainRoleQueryRepository.GetAll();
 		}
 
+		public async Task<MainRole> GetById(string Id)
+		{
+			return await _mainRoleQueryRepository.GetById(Id);	
+		}
+
 		public async Task<MainRole> GetByTitleAndCompanyId(string title, string companyId, CancellationToken cancellationToken)
 		{
 			return await _mainRoleQueryRepository.GetFirstByExpression(x => x.Title == title && x.CompanyId == companyId, cancellationToken, false);
@@ -44,6 +49,13 @@ namespace Project.Persistance.Services.AppServices
 		public async Task RemoveById(string Id)
 		{
 			await _mainRoleCommandRepository.RemoveById(Id);
+			await _appUnitOfWork.SaveChangesAsync();
+		}
+
+		public async Task UpdateAsync(MainRole mainRole)
+		{
+			_mainRoleCommandRepository.Update(mainRole);
+			await _appUnitOfWork.SaveChangesAsync();
 		}
 	}
 }
